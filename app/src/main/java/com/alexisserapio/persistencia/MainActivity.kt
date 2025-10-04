@@ -11,6 +11,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.annotation.ColorRes
 import androidx.core.content.edit
 import androidx.fragment.app.Fragment
@@ -42,12 +43,18 @@ class MainActivity : AppCompatActivity() {
         sp = getSharedPreferences(Constants.SP_FILE, Context.MODE_PRIVATE)
 
         val bgColor = sp.getInt(Constants.BG_COLOR, R.color.black)
+        val name = sp.getString("name", "No hay un archivo Guardado")
+        Toast.makeText(this, name, Toast.LENGTH_SHORT).show()
         navHostFragment.view?.setBackgroundColor(getColor(bgColor))
 
         binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+            /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null)
-                .setAnchorView(R.id.fab).show()
+                .setAnchorView(R.id.fab).show()*/
+            sp.edit {
+                putString("name","Alexis Arturo Serapio Hernández")
+            }
+            Toast.makeText(this, "Nombre Guardado", Toast.LENGTH_SHORT).show()
         }
     }
 
